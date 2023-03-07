@@ -1,8 +1,35 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+
+        // Non-Interactive way
+
+        if (args.length > 0) {
+            String path = args[0];
+            File file = new File(path);
+            try {
+                Scanner scanner = new Scanner(file);
+                double a = scanner.nextDouble();
+                double b = scanner.nextDouble();
+                double c = scanner.nextDouble();
+                solveMathEquation(a, b, c);
+                return;
+            }
+            catch (NoSuchElementException ignored) {
+                System.out.println("Incorrect input from file");
+            }
+            catch (FileNotFoundException ignored) {
+                System.out.println("File not found");
+            }
+        }
+
+        // Interactive way
+
         double a = readNumber("a = ");
         double b = readNumber("b = ");
         double c = readNumber("c = ");
